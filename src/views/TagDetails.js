@@ -33,7 +33,7 @@ const TagDetails = () => {
     if (nDate > today) return true;
 
     // Disable Sundays
-    if (nDate.getDay() === 0) return true;
+    //if (nDate.getDay() === 0) return true;
 
     // Allow only the past 3 days
     const pastDate = new Date();
@@ -95,6 +95,7 @@ const TagDetails = () => {
                   <MenuItem value="">
                     <em>None</em>
                   </MenuItem>
+                  <MenuItem value="Ellenabad">Ellenabad</MenuItem>
                   <MenuItem value="Hisar">Hisar</MenuItem>
                   <MenuItem value="Sirsa">Sirsa</MenuItem>
                   <MenuItem value="Delhi">Delhi</MenuItem>
@@ -146,6 +147,7 @@ const TagDetails = () => {
                         <MenuItem value="">
                           <em>None</em>
                         </MenuItem>
+                        <MenuItem value="Ellenabad">Ellenabad</MenuItem>
                         <MenuItem value="Hisar">Hisar</MenuItem>
                         <MenuItem value="Sirsa">Sirsa</MenuItem>
                         <MenuItem value="Delhi">Delhi</MenuItem>

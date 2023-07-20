@@ -43,11 +43,16 @@ const deleteTagById=(id)=>{
   return axios.delete(base_url + "/tags/remove/"+id, header);
 }
 
+const getPdf=(body)=>{
+  return axios.post(base_url+"/tags/generatepdf/date",header);
+}
+
 export default {
   tagRegister,
   scanTag,
   getTagStatusCompleteDetails,
   getAllRegiteredTagsInACity,
   getTagStatusForVisitor,
-  deleteTagById
+  deleteTagById,
+  getPdf
 };

@@ -150,6 +150,7 @@ const TagRegister = (props) => {
               />
             </Grid>
             <Grid item xs={6}>
+              
               {/* <TextField
             name="city"
             label="City"
@@ -161,13 +162,13 @@ const TagRegister = (props) => {
           /> */}
               <FormControl fullWidth required>
                 <InputLabel fullWidth>City</InputLabel>
-                {/* <Select value={city} onChange={(e) => setCity(e.target.value)}> */}
                 <Select
                   name="city"
                   fullWidth
                   value={formData.city}
                   onChange={handleChange}
                 >
+                  <MenuItem value="Ellenabad">Ellenabad</MenuItem>
                   <MenuItem value="Hisar">Hisar</MenuItem>
                   <MenuItem value="Sirsa">Sirsa</MenuItem>
                   <MenuItem value="Delhi">Delhi</MenuItem>

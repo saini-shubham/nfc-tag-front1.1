@@ -1,29 +1,38 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import tagServices from "../services/tagServices";
 import ComponentCard2 from "./ComponentCard2";
 import Box from "@mui/material/Box";
 import { DataGrid } from "@mui/x-data-grid";
-import { Card, CardBody, CardTitle, CardSubtitle, Table } from "reactstrap";
+import {
+  Card,
+  CardBody,
+  CardTitle,
+  CardSubtitle,
+  Table,
+  Button,
+} from "reactstrap";
 import Swal from "sweetalert2";
 import IconButton from "@mui/material/IconButton";
 //import DeleteIcon from "@mui/icons-material/Delete";
 import { Navigate, useNavigate } from "react-router-dom";
 import DoneAllIcon from "@mui/icons-material/DoneAll";
-
+import { useReactToPrint } from "react-to-pdf";
+import GetPdf from "./GetPdf";
 const TagDetailsList = (props) => {
   const [tableData, setTableData] = useState();
   const body = useSelector((state) => state.tagDetails.tagListRequiredDetails);
   const currentDate = new Date();
-const day = currentDate.getDate();
-const month = currentDate.getMonth() + 1; // Months are zero-based
-const year = currentDate.getFullYear();
+  const day = currentDate.getDate();
+  const month = currentDate.getMonth() + 1; // Months are zero-based
+  const year = currentDate.getFullYear();
 
-// Format the date as D/M/YYYY
-const formattedDate = day + '/' + month + '/' + year;
+  // Format the date as D/M/YYYY
+  const formattedDate = day + "/" + month + "/" + year;
 
-//console.log(formattedDate);
+  //console.log(formattedDate);
   const navigate = useNavigate();
+  const tableRef = useRef();
   useEffect(() => {
     console.log(body);
     tagServices
@@ -38,7 +47,7 @@ const formattedDate = day + '/' + month + '/' + year;
         Swal.fire({
           icon: "error",
           title: "Error",
-          text: err.response.data.message + body.date,
+          text: err.response.data.message,
         }).then(() => navigate(-1));
       });
   }, [body]);
@@ -74,11 +83,34 @@ const formattedDate = day + '/' + month + '/' + year;
       })
       .catch((err) => console.log(err));
   };
+  // const pdfHandler=useReactToPrint({
+  //   content:()=>tableRef.current,
+  //   documentTitle: "User Data",
+  //   onAfterprint:()=>alert("Data saved")
+  // })
 
+  const handleDownload = () => {
+    tagServices
+      .getPdf(body)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <>
       <ComponentCard2>
         <Card>
+          {/* <button onClick={}>Generate pdf</button> */}
+          <Card>
+            {/* <GetPdf></GetPdf> */}
+            <Button color="primary" onClick={handleDownload}>
+              Get PDF
+            </Button>
+          </Card>
+
           <CardBody>
             <CardTitle tag="h5">Status Report</CardTitle>
             <CardSubtitle className="mb-2 text-muted" tag="h6">
@@ -131,7 +163,7 @@ const formattedDate = day + '/' + month + '/' + year;
                         <IconButton
                           //onClick={deleteHandler}
                           aria-label="delete"
-                          disabled ={body.date !== formattedDate}
+                          disabled={body.date !== formattedDate}
                           // onClick={() => {
 
                           //   console.log(tdata.tagId);

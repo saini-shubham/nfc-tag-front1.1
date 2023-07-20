@@ -41,7 +41,7 @@ const Scan = () => {
   }, [setActions]);
   
   const onReading = ({ message, serialNumber }) => {
-    //alert(serialNumber)
+    //alert(serialNumber)re
     setTagId(serialNumber);
     for (const record of message.records) {
       switch (record.recordType) {

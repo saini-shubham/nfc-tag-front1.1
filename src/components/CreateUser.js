@@ -13,7 +13,7 @@ import {
 import ComponentCard from "./ComponentCard";
 import {} from '../services/common'
 import Swal from "sweetalert2";
-const cities = ['Hisar','Sirsa','Pune','Delhi']; // Replace with your city options
+const cities = ['Ellenabad','Hisar','Sirsa','Pune','Delhi']; // Replace with your city options
 
 const CreateUser = () => {
   const [name, setName] = useState("");
